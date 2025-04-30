@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Natural View | Stunning Landscape Photography</title>
+    <meta name="description" content="Explore breathtaking natural landscapes from around the world">
+    <style>
+        /* Base Styles */
+        :root {
+            --nature-green: #3a5a40;
+            --nature-light: #f8f9fa;
+            --nature-dark: #212529;
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--nature-light);
+            color: var(--nature-dark);
+            line-height: 1.6;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        /* Utility Classes */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 10px 25px;
+            background-color: var(--nature-green);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .btn:hover {
+            background-color: #2d4532;
+            transform: translateY(-2px);
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--nature-green);
+            margin-bottom: 2rem;
+            text-align: center;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--nature-green);
+            margin: 10px auto;
+        }
+        
+        /* Header & Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: var(--transition);
+            padding: 20px 0;
+        }
+        
+        header.scrolled {
+            background-color: rgba(58, 90, 64, 0.95);
+            padding: 10px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: white;
+            transition: var(--transition);
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80') center/cover no-repeat;
+            z-index: -1;
+            animation: zoomIn 8s infinite alternate;
+        }
+        
+        @keyframes zoomIn {
+            from {
+                transform: scale(1);
+            }
+            to {
+                transform: scale(1.1);
+            }
+        }
+        
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            padding: 0 20px;
+            transform: translateY(20px);
+            opacity: 0;
+            animation: fadeInUp 1s forwards 0.5s;
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+        }
+        
+        /* Gallery Section */
+        .gallery-section {
+            padding: 80px 0;
+        }
+        
+        .gallery-filter {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            padding: 8px 20px;
+            margin: 0 10px 10px;
+            background: none;
+            border: 2px solid var(--nature-green);
+            color: var(--nature-green);
+            border-radius: 30px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+        }
+        
+        .filter-btn.active, .filter-btn:hover {
+            background-color: var(--nature-green);
+            color: white;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+            height: 250px;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .gallery-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .gallery-item:hover .gallery-img {
+            transform: scale(1.1);
+        }
+        
+        .gallery-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            color: white;
+            transform: translateY(100%);
+            transition: var(--transition);
+        }
+        
+        .gallery-item:hover .gallery-info {
+            transform: translateY(0);
+        }
+        
+        .gallery-info h3 {
+            margin-bottom: 5px;
+        }
+        
+        /* Lightbox */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition);
+        }
+        
+        .lightbox.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .lightbox-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+        }
+        
+        .lightbox-img {
+            max-width: 100%;
+            max-height: 80vh;
+            display: block;
+            border-radius: 5px;
+        }
+        
+        .lightbox-caption {
+            color: white;
+            text-align: center;
+            margin-top: 15px;
+            font-size: 1.2rem;
+        }
+        
+        .close-lightbox {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+        
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+        
+        .lightbox-nav button {
+            background: rgba(255, 255, 255, 0.3);
+            border: none;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .lightbox-nav button:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+        
+        /* Featured Locations */
+        .locations-section {
+            padding: 80px 0;
+            background-color: white;
+        }
+        
+        .locations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .location-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+        }
+        
+        .location-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .location-img {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+        }
+        
+        .location-info {
+            padding: 20px;
+        }
+        
+        .location-info h3 {
+            color: var(--nature-green);
+            margin-bottom: 10px;
+        }
+        
+        .location-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+            color: #666;
+        }
+        
+        /* Newsletter */
+        .newsletter-section {
+            padding: 60px 0;
+            background-color: var(--nature-green);
+            color: white;
+            text-align: center;
+        }
+        
+        .newsletter-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 30px auto 0;
+        }
+        
+        .newsletter-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 5px 0 0 5px;
+            font-size: 1rem;
+        }
+        
+        .newsletter-btn {
+            padding: 12px 25px;
+            background-color: var(--nature-dark);
+            color: white;
+            border: none;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .newsletter-btn:hover {
+            background-color: #111;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--nature-dark);
+            color: white;
+            padding: 60px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            color: var(--nature-green);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-links a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            color: white;
+            background-color: rgba(255, 255, 255, 0.1);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background-color: var(--nature-green);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background-color: var(--nature-green);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transition: var(--transition);
+            }
+            
+            .nav-links.active {
+                left: 0;
+            }
+            
+            .nav-links li {
+                margin: 15px 0;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
+            
+            .newsletter-input {
+                border-radius: 5px;
+                margin-bottom: 10px;
+            }
+            
+            .newsletter-btn {
+                border-radius: 5px;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="logo">Natural View</a>
+                
+                <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+                
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#gallery">Gallery</a></li>
+                    <li><a href="#locations">Locations</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#Live">Live</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-bg"></div>
+        <div class="hero-overlay">
+            <div class="hero-content">
+                <h1>Discover Nature's Beauty</h1>
+                <p>Explore breathtaking landscapes from around the world through our stunning photography collection</p>
+                <a href="#gallery" class="btn">View Gallery</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section" id="gallery">
+        <div class="container">
+            <h2 class="section-title">Our Gallery</h2>
+            
+            <div class="gallery-filter">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="mountains">Mountains</button>
+                <button class="filter-btn" data-filter="forests">Forests</button>
+                <button class="filter-btn" data-filter="water">Water</button>
+                <button class="filter-btn" data-filter="deserts">Deserts</button>
+            </div>
+            
+            <div class="gallery-grid" id="galleryGrid">
+                <!-- Gallery items will be loaded dynamically from JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-content">
+            <span class="close-lightbox" id="closeLightbox">&times;</span>
+            <img src="" alt="" class="lightbox-img" id="lightboxImg">
+            <p class="lightbox-caption" id="lightboxCaption"></p>
+            
+            <div class="lightbox-nav">
+                <button id="prevBtn">&#10094;</button>
+                <button id="nextBtn">&#10095;</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Featured Locations -->
+    <section class="locations-section" id="locations">
+        <div class="container">
+            <h2 class="section-title">Featured Locations</h2>
+            
+            <div class="locations-grid" id="locationsGrid">
+                <!-- Location cards will be loaded dynamically from JavaScript -->
+            </div>
+        </div>
+        
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section" id="about">
+        <div class="container">
+            <h2 class="section-title">Our Story</h2>
+            
+            <div class="about-content">
+                <p>Founded in 2010, Natural View began as a passion project by a group of nature enthusiasts and professional photographers. What started as a small blog sharing photos from weekend hikes has grown into a comprehensive platform showcasing the world's most breathtaking natural landscapes.</p>
+                
+                <p>Our mission is to connect people with nature through stunning photography, inspire conservation efforts, and promote sustainable tourism. We believe that by showcasing the beauty of our planet, we can encourage more people to appreciate and protect these natural wonders.</p>
+                
+                <p>Today, our team consists of over 20 professional photographers and writers who travel the world to capture and document these incredible locations. We partner with conservation organizations and local communities to ensure our work has a positive impact.</p>
+            </div>
+            
+            <div class="team-grid">
+                <!-- Team members could be added here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter-section">
+        <div class="container">
+            <div class="newsletter-content">
+                <h2>Join Our Community</h2>
+                <p>Subscribe to our newsletter to receive weekly updates featuring new photography collections, travel tips, and exclusive content.</p>
+                
+                <form class="newsletter-form" id="newsletterForm">
+                    <input type="email" placeholder="Your email address" class="newsletter-input" required>
+                    <button type="submit" class="newsletter-btn">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </section>
+<section>
+    <div class="map-container"id="Live">
+        <style>
+          .map-container {
+            margin-top: 30px;
+            padding: 10px;
+            border-radius: 12px;
+            background: #c3107b;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+            transition: all 0.2s ease-in-out;
+            display: inline-block;
+          }
+      
+          .map-container:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 20px rgba(11, 18, 214, 0.2);
+          }
+      
+          .map-container .map-link img {
+            width: 94px;
+            height: 94px;
+            border-radius: 28px;
+            transition: transform 0.3s ease;
+          }
+      
+          .map-container .map-link img:hover {
+            transform: rotate(10deg) scale(1.1);
+          }
+        </style>
+      
+        <a class="map-link" href="https://www.google.com/maps/dir/?api=1&destination=Kapil+Mart,+Radhapuram,+Bhopal,+Madhya+Pradesh,+India" target="_blank" rel="noopener">
+          <img src="https://cdn-icons-png.flaticon.com/512/684/684908.png" alt="Open Map to Kapil Mart" loading="lazy" />
+        </a>
+      </div>
+</section>
+    <!-- Contact Section -->
+   
+    <section id="contact">
+        
+    <!-- Floating background shapes -->
+    <div class="shape shape-1" style="position:absolute;width:200px;height:200px;background:#ff8906;border-radius:50%;opacity:0.5;filter:blur(30px);top:10%;left:5%;animation:float-shape 15s infinite linear;"></div>
+    <div class="shape shape-2" style="position:absolute;width:300px;height:300px;background:#e53170;border-radius:50%;opacity:0.5;filter:blur(30px);bottom:10%;right:5%;animation:float-shape 15s infinite linear;animation-delay:-5s;"></div>
+    <div class="shape shape-3" style="position:absolute;width:150px;height:150px;background:#f25f4c;border-radius:50%;opacity:0.5;filter:blur(30px);top:50%;left:30%;animation:float-shape 15s infinite linear;animation-delay:-10s;"></div>
+    
+    <div class="contact-container" style="width:90%;max-width:1200px;position:relative;z-index:10;animation:float 6s ease-in-out infinite;">
+        <div class="contact-card" style="background:rgba(255,255,255,0.05);backdrop-filter:blur(15px);border-radius:30px;border:1px solid rgba(255,255,255,0.1);box-shadow:0 25px 45px rgba(0,0,0,0.2);padding:60px;display:grid;grid-template-columns:1fr 1fr;gap:40px;transform-style:preserve-3d;transition:all 0.5s ease;">
+            <div class="contact-left" style="position:relative;display:flex;flex-direction:column;justify-content:center;">
+                <h1 class="contact-title" style="font-family:'Montserrat',sans-serif;font-size:3.5rem;font-weight:700;margin-bottom:20px;background:linear-gradient(90deg,#ff8906,#e53170);-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.2;transform:translateZ(50px);">Let's Create Something Amazing Together</h1>
+                <p class="contact-subtitle" style="font-size:1.2rem;margin-bottom:40px;color:#a7a9be;transform:translateZ(30px);">We're excited to hear about your project and explore how we can help bring your vision to life.</p>
+                
+                <div class="contact-methods" style="display:flex;flex-direction:column;gap:25px;transform:translateZ(40px);">
+                    <div class="method" style="display:flex;align-items:center;gap:15px;padding:15px 20px;background:rgba(255,255,255,0.05);border-radius:15px;transition:all 0.3s ease;border-left:3px solid transparent;">
+                        <div class="method-icon" style="width:50px;height:50px;background:linear-gradient(135deg,#ff8906,#e53170);border-radius:12px;display:flex;justify-content:center;align-items:center;font-size:1.5rem;color:white;">📍</div>
+                        <div class="method-text">
+                            <h3 style="font-size:1.2rem;margin-bottom:5px;color:#fffffe;">Our Studio</h3>
+                            <p style="font-size:0.9rem;color:#a7a9be;">456 Innovation Drive, Tech City, TC 98765</p>
+                        </div>
+                    </div>
+                    
+                    <div class="method" style="display:flex;align-items:center;gap:15px;padding:15px 20px;background:rgba(255,255,255,0.05);border-radius:15px;transition:all 0.3s ease;border-left:3px solid transparent;">
+                        <div class="method-icon" style="width:50px;height:50px;background:linear-gradient(135deg,#ff8906,#e53170);border-radius:12px;display:flex;justify-content:center;align-items:center;font-size:1.5rem;color:white;">✉️</div>
+                        <div class="method-text">
+                            <h3 style="font-size:1.2rem;margin-bottom:5px;color:#fffffe;">Email Us</h3>
+                            <p style="font-size:0.9rem;color:#a7a9be;">connect@creativestudio.com<br>support@creativestudio.com</p>
+                        </div>
+                    </div>
+                    
+                    <div class="method" style="display:flex;align-items:center;gap:15px;padding:15px 20px;background:rgba(255,255,255,0.05);border-radius:15px;transition:all 0.3s ease;border-left:3px solid transparent;">
+                        <div class="method-icon" style="width:50px;height:50px;background:linear-gradient(135deg,#ff8906,#e53170);border-radius:12px;display:flex;justify-content:center;align-items:center;font-size:1.5rem;color:white;">📞</div>
+                        <div class="method-text">
+                            <h3 style="font-size:1.2rem;margin-bottom:5px;color:#fffffe;">Call Us</h3>
+                            <p style="font-size:0.9rem;color:#a7a9be;">+1 (555) 987-6543<br>Mon-Fri, 10am-6pm EST</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="contact-right" style="position:relative;">
+                <form class="contact-form" style="display:flex;flex-direction:column;gap:20px;background:rgba(255,255,255,0.05);padding:40px;border-radius:20px;box-shadow:0 10px 30px rgba(0,0,0,0.1);transform:translateZ(50px);">
+                    <div class="form-group" style="position:relative;">
+                        <input type="text" id="name" class="form-control" required style="width:100%;padding:15px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:10px;color:#fffffe;font-size:1rem;transition:all 0.3s ease;">
+                        <label for="name" style="position:absolute;top:15px;left:15px;color:#a7a9be;pointer-events:none;transition:all 0.3s ease;">Your Name</label>
+                    </div>
+                    
+                    <div class="form-group" style="position:relative;">
+                        <input type="email" id="email" class="form-control" required style="width:100%;padding:15px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:10px;color:#fffffe;font-size:1rem;transition:all 0.3s ease;">
+                        <label for="email" style="position:absolute;top:15px;left:15px;color:#a7a9be;pointer-events:none;transition:all 0.3s ease;">Email Address</label>
+                    </div>
+                    
+                    <div class="form-group" style="position:relative;">
+                        <input type="text" id="subject" class="form-control" required style="width:100%;padding:15px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:10px;color:#fffffe;font-size:1rem;transition:all 0.3s ease;">
+                        <label for="subject" style="position:absolute;top:15px;left:15px;color:#a7a9be;pointer-events:none;transition:all 0.3s ease;">Project Type</label>
+                    </div>
+                    
+                    <div class="form-group" style="position:relative;">
+                        <textarea id="message" class="form-control" required style="width:100%;padding:15px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:10px;color:#fffffe;font-size:1rem;transition:all 0.3s ease;min-height:150px;"></textarea>
+                        <label for="message" style="position:absolute;top:15px;left:15px;color:#a7a9be;pointer-events:none;transition:all 0.3s ease;">Tell Us About Your Project</label>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn" style="background:linear-gradient(90deg,#ff8906,#e53170);color:white;border:none;padding:15px;border-radius:10px;font-size:1rem;font-weight:600;cursor:pointer;transition:all 0.3s ease;text-transform:uppercase;letter-spacing:1px;position:relative;overflow:hidden;">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotateY(0deg); }
+            50% { transform: translateY(-20px) rotateY(5deg); }
+        }
+        @keyframes float-shape {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(50px, 50px) rotate(90deg); }
+            50% { transform: translate(100px, 0) rotate(180deg); }
+            75% { transform: translate(50px, -50px) rotate(270deg); }
+            100% { transform: translate(0, 0) rotate(360deg); }
+        }
+    </style>
+
+    <script>
+        // Add hover effects
+        document.querySelectorAll('.method').forEach(method => {
+            method.addEventListener('mouseenter', () => {
+                method.style.background = 'rgba(255, 137, 6, 0.1)';
+                method.style.borderLeft = '3px solid #ff8906';
+                method.style.transform = 'translateX(10px)';
+            });
+            method.addEventListener('mouseleave', () => {
+                method.style.background = 'rgba(255, 255, 255, 0.05)';
+                method.style.borderLeft = '3px solid transparent';
+                method.style.transform = 'translateX(0)';
+            });
+        });
+
+        // Form label animation
+        document.querySelectorAll('.form-control').forEach(input => {
+            input.addEventListener('focus', function() {
+                const label = this.nextElementSibling;
+                label.style.top = '-10px';
+                label.style.left = '10px';
+                label.style.fontSize = '0.8rem';
+                label.style.background = '#0f0e17';
+                label.style.padding = '0 5px';
+                label.style.color = '#ff8906';
+            });
+            
+            input.addEventListener('blur', function() {
+                if (!this.value) {
+                    const label = this.nextElementSibling;
+                    label.style.top = '15px';
+                    label.style.left = '15px';
+                    label.style.fontSize = '1rem';
+                    label.style.background = 'transparent';
+                    label.style.color = '#a7a9be';
+                }
+            });
+        });
+    </script>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Natural View</h3>
+                    <p>Discover the world's most breathtaking natural landscapes through our photography collections and travel guides.</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#gallery">Gallery</a></li>
+                        <li><a href="#locations">Locations</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Categories</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Mountains</a></li>
+                        <li><a href="#">Forests</a></li>
+                        <li><a href="#">Lakes & Rivers</a></li>
+                        <li><a href="#">Deserts</a></li>
+                        <li><a href="#">Coastal</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Legal</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Copyright Information</a></li>
+                        <li><a href="#">Licensing</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Natural View. All rights reserved.</p>
+            </div>
+        </div> 
+       
+    </footer>
+
+    <!-- Font Awesome for icons (loaded from CDN) -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+        
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        
+        // Gallery Data (would normally come from an API)
+        const galleryData = [
+            {
+                id: 1,
+                src: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80',
+                title: 'Mountain Peaks',
+                location: 'Himalayas, Nepal',
+                category: 'mountains'
+            },
+            {
+                id: 2,
+                src: 'https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80',
+                title: 'Ancient Forest',
+                location: 'Black Forest, Germany',
+                category: 'forests'
+            },
+            {
+                id: 3,
+                src: 'https://images.unsplash.com/photo-1505118380757-91f5f5632de0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1526&q=80',
+                title: 'Ocean Sunset',
+                location: 'Pacific Coast, USA',
+                category: 'water'
+            },
+            {
+                id: 4,
+                src: 'https://images.unsplash.com/photo-1509316785289-025f5b846b35?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1476&q=80',
+                title: 'Sand Dunes',
+                location: 'Sahara Desert, Morocco',
+                category: 'deserts'
+            },
+            {
+                id: 5,
+                src: 'https://images.unsplash.com/photo-1511497584788-876760111969?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80',
+                title: 'Alpine Lake',
+                location: 'Swiss Alps, Switzerland',
+                category: 'mountains'
+            },
+            {
+                id: 6,
+                src: 'https://images.unsplash.com/photo-1476231682828-37e571bc172f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80',
+                title: 'Waterfall',
+                location: 'Iguazu Falls, Argentina',
+                category: 'water'
+            },
+            {
+                id: 7,
+                src: 'https://images.unsplash.com/photo-1470114716159-e389f8712fda?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80',
+                title: 'Autumn Forest',
+                location: 'New England, USA',
+                category: 'forests'
+            },
+            {
+                id: 8,
+                src: 'https://images.unsplash.com/photo-1509315703191-ef9951438a1e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80',
+                title: 'Canyon',
+                location: 'Grand Canyon, USA',
+                category: 'deserts'
+            },
+            {
+                id: 9,
+                src: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80',
+                title: 'Mountain Lake',
+                location: 'Canadian Rockies, Canada',
+                category: 'mountains'
+            }
+        ];
+        
+        // Locations Data
+        const locationsData = [
+            {
+                id: 1,
+                title: 'Patagonia',
+                description: 'Stunning mountain ranges, glaciers, and lakes at the southern tip of South America.',
+                image: 'https://images.unsplash.com/photo-1516604648170-75d31a5d7a58?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80',
+                country: 'Argentina/Chile',
+                photos: 1245,
+                featured: true
+            },
+            {
+                id: 2,
+                title: 'Banff National Park',
+                description: 'Canada\'s oldest national park known for its turquoise lakes and dramatic peaks.',
+                image: 'https://images.unsplash.com/photo-1500581276021-a4bbcd0050c5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80',
+                country: 'Canada',
+                photos: 982,
+                featured: true
+            },
+            {
+                id: 3,
+                title: 'Norwegian Fjords',
+                description: 'Majestic glacial valleys with steep cliffs and deep blue waters.',
+                image: 'https://images.unsplash.com/photo-1518688248744-1d7c2317e5d5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80',
+                country: 'Norway',
+                photos: 876,
+                featured: true
+            }
+        ];
+        
+        // Load Gallery
+        function loadGallery() {
+            const galleryGrid = document.getElementById('galleryGrid');
+            galleryGrid.innerHTML = '';
+            
+            galleryData.forEach(item => {
+                const galleryItem = document.createElement('div');
+                galleryItem.className = `gallery-item ${item.category}`;
+                galleryItem.dataset.category = item.category;
+                galleryItem.innerHTML = `
+                    <img src="${item.src}" alt="${item.title}" class="gallery-img">
+                    <div class="gallery-info">
+                        <h3>${item.title}</h3>
+                        <p>${item.location}</p>
+                    </div>
+                `;
+                
+                galleryItem.addEventListener('click', () => openLightbox(item.id));
+                galleryGrid.appendChild(galleryItem);
+            });
+        }
+        
+        // Filter Gallery
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterBtns.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                btn.classList.add('active');
+                
+                const filter = btn.dataset.filter;
+                const galleryItems = document.querySelectorAll('.gallery-item');
+                
+                galleryItems.forEach(item => {
+                    if (filter === 'all' || item.dataset.category === filter) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+        
+        // Lightbox functionality
+        let currentImageIndex = 0;
+        
+        function openLightbox(id) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightboxImg');
+            const lightboxCaption = document.getElementById('lightboxCaption');
+            
+            // Find the clicked image in the gallery data
+            const image = galleryData.find(item => item.id === id);
+            currentImageIndex = galleryData.findIndex(item => item.id === id);
+            
+            if (image) {
+                lightboxImg.src = image.src;
+                lightboxCaption.textContent = `${image.title} - ${image.location}`;
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+        
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+        
+        function navigateLightbox(direction) {
+            if (direction === 'prev') {
+                currentImageIndex = (currentImageIndex - 1 + galleryData.length) % galleryData.length;
+            } else {
+                currentImageIndex = (currentImageIndex + 1) % galleryData.length;
+            }
+            
+            const image = galleryData[currentImageIndex];
+            const lightboxImg = document.getElementById('lightboxImg');
+            const lightboxCaption = document.getElementById('lightboxCaption');
+            
+            lightboxImg.src = image.src;
+            lightboxCaption.textContent = `${image.title} - ${image.location}`;
+        }
+        
+        // Event listeners for lightbox
+        document.getElementById('closeLightbox').addEventListener('click', closeLightbox);
+        document.getElementById('prevBtn').addEventListener('click', () => navigateLightbox('prev'));
+        document.getElementById('nextBtn').addEventListener('click', () => navigateLightbox('next'));
+        
+        // Close lightbox when clicking outside the image
+        document.getElementById('lightbox').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('lightbox')) {
+                closeLightbox();
+            }
+        });
+        
+        // Keyboard navigation for lightbox
+        document.addEventListener('keydown', (e) => {
+            const lightbox = document.getElementById('lightbox');
+            
+            if (lightbox.classList.contains('active')) {
+                if (e.key === 'Escape') {
+                    closeLightbox();
+                } else if (e.key === 'ArrowLeft') {
+                    navigateLightbox('prev');
+                } else if (e.key === 'ArrowRight') {
+                    navigateLightbox('next');
+                }
+            }
+        });
+        
+        // Load Locations
+        function loadLocations() {
+            const locationsGrid = document.getElementById('locationsGrid');
+            
+            locationsData.forEach(location => {
+                const locationCard = document.createElement('div');
+                locationCard.className = 'location-card';
+                locationCard.innerHTML = `
+                    <img src="${location.image}" alt="${location.title}" class="location-img">
+                    <div class="location-info">
+                        <h3>${location.title}</h3>
+                        <p>${location.description}</p>
+                        <div class="location-stats">
+                            <span>${location.country}</span>
+                            <span>${location.photos} photos</span>
+                        </div>
+                    </div>
+                `;
+                
+                locationsGrid.appendChild(locationCard);
+            });
+        }
+        
+        // Newsletter Form
+        document.getElementById('newsletterForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = this.querySelector('input').value;
+            alert(`Thank you for subscribing with ${email}! You'll receive our next newsletter soon.`);
+            this.reset();
+        });
+        
+        // Contact Form
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your message! We will get back to you soon.');
+            this.reset();
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Initialize the page
+        window.addEventListener('DOMContentLoaded', () => {
+            loadGallery();
+            loadLocations();
+        });
+    </script>
+</body>
+</html>
